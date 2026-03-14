@@ -81,7 +81,24 @@ class Cell:
             wall_two = Point(self.__x2, self.__y2)
             wall_line = Line (wall_one, wall_two)
             self.__win.draw_line(wall_line, fill_color)
+
+    def draw_move(self, to_cell, undo=False):
+        if undo == False:
+            fill_color = "red"
+        else:
+            fill_color = "gray"
         
+        height = (self.__y1 + self.__y2) / 2
+        width = (self.__x1 + self.__x2) / 2
+        center = Point(width, height)
+
+        to_height = (to_cell.__y1 + to_cell.__y2) / 2
+        to_width = (to_cell.__x1 + to_cell.__x2) / 2
+        to_center = Point(to_width, to_height)
+
+        path = Line(center, to_center)
+
+        self.__win.draw_line(path, fill_color)
 
 def main():
     window = Window(800, 600)
@@ -96,9 +113,11 @@ def main():
     y = 350
     z = 600
     #line = Line(a, b)
-    cell = Cell(window)
-    cell.draw(a, b, c, d)
-    cell.draw(w, x, y, z)
+    cell_one = Cell(window)
+    cell_two = Cell(window)
+    cell_one.draw(a, b, c, d)
+    cell_two.draw(w, x, y, z)
+    cell_one.draw_move(cell_two)
     #window.draw_line(line, "red")
     window.wait_for_close()
 
