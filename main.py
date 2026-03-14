@@ -40,13 +40,66 @@ class Line:
     def draw(self, canvas, fill_color):
         canvas.create_line(self.point_one.x, self.point_one.y, self.point_two.x, self.point_two.y, fill=fill_color, width=2)
         
+class Cell:
+    def __init__(self, window):
+        self.has_left_wall = True
+        self.has_right_wall = True
+        self.has_top_wall = True
+        self.has_bottom_wall = True
+        self.__x1 = -1
+        self.__x2 = -1
+        self.__y1 = -1
+        self.__y2 = -1
+        self.__win = window
+    
+    def draw(self, x1, y1, x2, y2, fill_color="black"):
+        self.__x1 = x1
+        self.__y1 = y1
+        self.__x2 = x2
+        self.__y2 = y2
+
+        if self.has_left_wall == True:
+            wall_one = Point(self.__x1, self.__y1)
+            wall_two = Point(self.__x1, self.__y2)
+            wall_line = Line (wall_one, wall_two)
+            self.__win.draw_line(wall_line, fill_color)
+
+        if self.has_right_wall == True:
+            wall_one = Point(self.__x2, self.__y1)
+            wall_two = Point(self.__x2, self.__y2)
+            wall_line = Line (wall_one, wall_two)
+            self.__win.draw_line(wall_line, fill_color)
+
+        if self.has_top_wall == True:
+            wall_one = Point(self.__x1, self.__y1)
+            wall_two = Point(self.__x2, self.__y1)
+            wall_line = Line (wall_one, wall_two)
+            self.__win.draw_line(wall_line, fill_color)
+
+        if self.has_bottom_wall == True:
+            wall_one = Point(self.__x1, self.__y2)
+            wall_two = Point(self.__x2, self.__y2)
+            wall_line = Line (wall_one, wall_two)
+            self.__win.draw_line(wall_line, fill_color)
+        
 
 def main():
     window = Window(800, 600)
-    a = Point(100, 100)
-    b = Point(700, 594)
-    line = Line(a, b)
-    window.draw_line(line, "red")
+    #a = Point(100, 100)
+    #b = Point(700, 594)
+    a = 50
+    b = 200
+    c = 150
+    d = 400
+    w = 250
+    x = 300
+    y = 350
+    z = 600
+    #line = Line(a, b)
+    cell = Cell(window)
+    cell.draw(a, b, c, d)
+    cell.draw(w, x, y, z)
+    #window.draw_line(line, "red")
     window.wait_for_close()
 
 main()
