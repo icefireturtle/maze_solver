@@ -1,4 +1,5 @@
 from tkinter import Tk, BOTH, Canvas
+import time
 
 class Window:
     def __init__(self, width, height):
@@ -100,10 +101,58 @@ class Cell:
 
         self.__win.draw_line(path, fill_color)
 
+class Maze:
+    def __init__(
+            self,
+            x1,
+            y1,
+            num_rows,
+            num_cols,
+            cell_size_x,
+            cell_size_y,
+            win,
+    ):
+        self.__x1 = x1
+        self.__y1 = y1
+        self.__rows = num_rows
+        self.__cols = num_cols
+        self.__cell_size_x = cell_size_x
+        self.__cell_size_y = cell_size_y
+        self.__win = win
+        self.__cells = []
+        self.__create_cells()
+
+    def __create_cells(self):
+        for c in range(self.__cols):
+            col = []
+            for r in range(self.__rows):
+                col.append(Cell(self.__win))
+            self.__cells.append(col)
+        
+        for c in range(self.__cols):
+            for r in range(self.__rows):
+                self.__draw_cell(c, r)
+
+    def __draw_cell(self, i, j):
+        x1 = self.__x1 + i * self.__cell_size_x
+        y1 = self.__y1 + j * self.__cell_size_y
+        x2 = x1 + self.__cell_size_x
+        y2 = y1 + self.__cell_size_y
+
+        self.__cells[i][j].draw(x1, y1, x2, y2)
+
+        self.__animate()
+
+    def __animate(self): 
+        self.__win.redraw()
+        time.sleep(.5)
+        
+
+
 def main():
     window = Window(800, 600)
-    #a = Point(100, 100)
-    #b = Point(700, 594)
+    """a = Point(100, 100)
+    b = Point(700, 594)
     a = 50
     b = 200
     c = 150
@@ -113,12 +162,19 @@ def main():
     y = 350
     z = 600
     #line = Line(a, b)
-    cell_one = Cell(window)
-    cell_two = Cell(window)
-    cell_one.draw(a, b, c, d)
-    cell_two.draw(w, x, y, z)
-    cell_one.draw_move(cell_two)
-    #window.draw_line(line, "red")
+    #cell_one = Cell(window)
+    #cell_two = Cell(window)
+    #cell_one.draw(a, b, c, d)
+    #cell_two.draw(w, x, y, z)
+    #cell_one.draw_move(cell_two)
+    #window.draw_line(line, "red")"""
+    x1=250
+    y1=150
+    rows=5
+    cols=5
+    cell_size_x=50
+    cell_size_y=50
+    maze = Maze(x1, y1, rows, cols, cell_size_x, cell_size_y, window)
     window.wait_for_close()
 
 main()
