@@ -38,12 +38,22 @@ class Cell:
                 wall_two = Point(self.__x2, self.__y1)
                 wall_line = Line (wall_one, wall_two)
                 self.__win.draw_line(wall_line, fill_color)
+            elif self.has_top_wall == False:
+                wall_one = Point(self.__x1, self.__y1)
+                wall_two = Point(self.__x2, self.__y1)
+                wall_line = Line (wall_one, wall_two)
+                self.__win.draw_line(wall_line, "#d9d9d9")
 
             if self.has_bottom_wall == True:
                 wall_one = Point(self.__x1, self.__y2)
                 wall_two = Point(self.__x2, self.__y2)
                 wall_line = Line (wall_one, wall_two)
                 self.__win.draw_line(wall_line, fill_color)
+            elif self.has_bottom_wall == False:
+                wall_one = Point(self.__x1, self.__y2)
+                wall_two = Point(self.__x2, self.__y2)
+                wall_line = Line (wall_one, wall_two)
+                self.__win.draw_line(wall_line, "#d9d9d9")
 
     def draw_move(self, to_cell, undo=False):
         if self.__win != None:
