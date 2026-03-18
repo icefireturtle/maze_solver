@@ -12,6 +12,8 @@ class Cell:
         self.__y2 = -1
         self.__win = window
         self.visited = False
+        self.entrance = False
+        self.exit = False
     
     def draw(self, x1, y1, x2, y2, fill_color="black"):
         
@@ -29,7 +31,7 @@ class Cell:
                 self.__win.draw_line(wall_line, fill_color)
             elif self.has_left_wall == False:
                 wall_one = Point(self.__x1, self.__y1)
-                wall_two = Point(self.__x2, self.__y1)
+                wall_two = Point(self.__x1, self.__y2)
                 wall_line = Line (wall_one, wall_two)
                 self.__win.draw_line(wall_line, "#d9d9d9")
 
@@ -40,7 +42,7 @@ class Cell:
                 self.__win.draw_line(wall_line, fill_color)
             elif self.has_right_wall == False:
                 wall_one = Point(self.__x1, self.__y1)
-                wall_two = Point(self.__x2, self.__y1)
+                wall_two = Point(self.__x2, self.__y2)
                 wall_line = Line (wall_one, wall_two)
                 self.__win.draw_line(wall_line, "#d9d9d9")
 
