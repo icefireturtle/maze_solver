@@ -1,4 +1,4 @@
-from tkinter import Tk, BOTH, Canvas, messagebox, Button
+from tkinter import Tk, BOTH, Canvas, messagebox, Button, Frame
 
 
 class Window:
@@ -11,15 +11,19 @@ class Window:
         self.__canvas.pack(fill=BOTH, expand=1)
         self.__running_state = False
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
-        self.buttons()
+        self.__frame = Frame(self.__root, bg="#d9d9d9", padx=10, pady=10)
         
+        self.buttons()
 
     def buttons(self):
-        btn_new_maze = Button(self.__root, text="New Maze", command=self.clicked, bg="white", font=("Arial", 12))
-        btn_new_maze.pack(pady=10)
+        btn_new_maze = Button(self.__frame, text="New Maze", command=self.clicked, bg="white", font=("Arial", 12))
 
-        btn_exit = Button(self.__root, text="Exit", command=self.safe_exit, bg="white", font=("Arial", 12))
-        btn_exit.pack(pady=10)
+        btn_exit = Button(self.__frame, text="Exit", command=self.safe_exit, bg="white", font=("Arial", 12))
+        
+        btn_new_maze.grid(row=1, column=1, padx=10, pady=10)
+        btn_exit.grid(row=1, column=2, padx=10, pady=10)
+
+        self.__frame.pack()
 
     def clicked(self):
         print("Button clicked!")
