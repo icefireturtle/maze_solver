@@ -16,7 +16,7 @@ class Window:
         self.buttons()
 
     def buttons(self):
-        btn_new_maze = Button(self.__frame, text="New Maze", command=self.clicked, bg="white", font=("Arial", 12))
+        btn_new_maze = Button(self.__frame, text="New Maze", command=self.new_maze, bg="white", font=("Arial", 12))
 
         btn_exit = Button(self.__frame, text="Exit", command=self.safe_exit, bg="white", font=("Arial", 12))
         
@@ -28,6 +28,10 @@ class Window:
     def clicked(self):
         print("Button clicked!")
 
+    def new_maze(self):
+        if messagebox.askquestion("Creating New Maze", "Are you sure you want to generate another maze?"):
+            pass
+        
     def draw_line(self, line, fill_color):
         line.draw(self.__canvas, fill_color)
 
