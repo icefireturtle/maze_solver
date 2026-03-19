@@ -26,7 +26,7 @@ def main():
     cols=5
     cell_size_x=50
     cell_size_y=50
-    maze = Maze(x1, y1, rows, cols, cell_size_x, cell_size_y, window)
+    maze = Maze(x1, y1, rows, cols, cell_size_x, cell_size_y, window, seed=1142)
     window.wait_for_close()
 
 main()
