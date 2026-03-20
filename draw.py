@@ -1,4 +1,5 @@
-from tkinter import Tk, BOTH, Canvas, messagebox, Button, Frame
+import random
+from tkinter import Label, StringVar, Tk, BOTH, Canvas, messagebox, Button, Frame
 import builder
 
 
@@ -8,12 +9,18 @@ class Window:
         self.height = height
         self.__root = Tk()
         self.__root.title("The Mighty Maze")
+        self.current_maze_seed = "1142"
+        self.__text_frame = Frame(self.__root, bg="#d9d9d9", padx=10, pady=10)
+        self.__text = Label(self.__text_frame, text="Welcome to the Mighty Maze Solver!\nWatch as it is solved in real time!", bg="#d9d9d9", font=("Arial", 14))
+        self.__current_maze_text = Label(self.__text_frame, text=f"Current Maze: {self.current_maze_seed}", bg="#d9d9d9", font=("Arial", 12))
+        self.__text.pack()
+        self.__current_maze_text.pack()
+        self.__text_frame.pack()
         self.__canvas = Canvas(self.__root, width=self.width, height=self.height)
         self.__canvas.pack(fill=BOTH, expand=1)
         self.__running_state = False
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
         self.__frame = Frame(self.__root, bg="#d9d9d9", padx=10, pady=10)
-        
         self.buttons()
 
     def buttons(self):
@@ -26,6 +33,10 @@ class Window:
 
         self.__frame.pack()
 
+    def set_current_maze_text(self, text):
+        self.current_maze_seed = text
+        self.__current_maze_text.config(text=f"New Maze Generated.\nCurrent Maze: {self.current_maze_seed}")
+
     def new_maze(self):
         if messagebox.askquestion("Creating New Maze", "Are you sure you want to generate another maze?"):
             self.__canvas.delete("all")
@@ -35,7 +46,11 @@ class Window:
             cols=5
             cell_size_x=50
             cell_size_y=50
-            builder.build_maze(x1, y1, rows, cols, cell_size_x, cell_size_y, None, seed=142)
+            seed = random.randint(0, 10000)
+            #builder.build_maze(x1, y1, rows, cols, cell_size_x, cell_size_y, None, seed=142)
+            self.set_current_maze_text(str(seed))
+            self.redraw()
+            builder.build_maze(x1, y1, rows, cols, cell_size_x, cell_size_y, None, seed)  
         
     def draw_line(self, line, fill_color):
         line.draw(self.__canvas, fill_color)
