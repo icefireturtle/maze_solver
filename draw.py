@@ -1,5 +1,5 @@
 import random
-from tkinter import Label, StringVar, Tk, BOTH, Canvas, messagebox, Button, Frame
+from tkinter import Entry, Label, Tk, BOTH, Canvas, messagebox, Button, Frame, simpledialog
 import builder
 
 
@@ -46,7 +46,11 @@ class Window:
             cols=5
             cell_size_x=50
             cell_size_y=50
-            seed = random.randint(0, 5000)
+            seed_entry = simpledialog.askstring("Enter Seed Value", "Enter a seed value for the maze (leave blank for random):")
+            if not seed_entry:
+                seed = random.randint(0, 5000)
+            else:
+                seed = seed_entry
             self.set_current_maze_text(str(seed))
             self.redraw()
             builder.build_maze(x1, y1, rows, cols, cell_size_x, cell_size_y, None, seed)  
