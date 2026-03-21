@@ -46,8 +46,7 @@ class Window:
             cols=5
             cell_size_x=50
             cell_size_y=50
-            seed = random.randint(0, 10000)
-            #builder.build_maze(x1, y1, rows, cols, cell_size_x, cell_size_y, None, seed=142)
+            seed = random.randint(0, 5000)
             self.set_current_maze_text(str(seed))
             self.redraw()
             builder.build_maze(x1, y1, rows, cols, cell_size_x, cell_size_y, None, seed)  
