@@ -9,11 +9,11 @@ def get_maze_parameters():
     params = draw.Window.Form(window._Window__root)
     print(f"params {params.result}")
     if params.result:
-        rows = params[0]
-        cols = params[1]
-        cell_size_x = params[2]
-        cell_size_y = params[3]
-        seed = params[4]
+        rows = int(params.result[0])
+        cols = int(params.result[1])
+        cell_size_x = int(params.result[2])
+        cell_size_y = int(params.result[3])
+        seed = int(params.result[4]) if params.result[4] else None
     else:
         rows = 5
         cols = 5
