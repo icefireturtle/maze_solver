@@ -43,7 +43,7 @@ class Window:
     def new_maze(self):
         if messagebox.askquestion("Creating New Maze", "Are you sure you want to generate another maze?"):
             self.__canvas.delete("all")
-            x1=250
+            """x1=250
             y1=150
             rows=5
             cols=5
@@ -56,7 +56,10 @@ class Window:
                 seed = seed_entry
             self.set_current_maze_text(str(seed))
             self.redraw()
-            builder.build_maze(x1, y1, rows, cols, cell_size_x, cell_size_y, None, seed)  
+            builder.build_maze(x1, y1, rows, cols, cell_size_x, cell_size_y, None, seed) """
+            params =builder.get_maze_parameters()
+            builder.build_maze(None, None, params[0], params[1], params[2], params[3], None, params[4])
+            
         
     def draw_line(self, line, fill_color):
         line.draw(self.__canvas, fill_color)
