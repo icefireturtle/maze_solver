@@ -20,6 +20,7 @@ def get_maze_parameters():
         cell_size_x = 50
         cell_size_y = 50
         seed = 1142
+    draw.Window.set_current_maze_text(window, str(seed) if seed else "Random Seed")
     return rows, cols, cell_size_x, cell_size_y, seed
 
 

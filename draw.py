@@ -57,7 +57,7 @@ class Window:
             self.set_current_maze_text(str(seed))
             self.redraw()
             builder.build_maze(x1, y1, rows, cols, cell_size_x, cell_size_y, None, seed) """
-            params =builder.get_maze_parameters()
+            params = builder.get_maze_parameters()
             builder.build_maze(None, None, params[0], params[1], params[2], params[3], None, params[4])
             
         
